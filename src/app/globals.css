@@ -9,11 +9,13 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
+    --card-background: 240 242 247;
+
  
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary-color: 11 87 208;
+    --primary-color: 58 120 242;
  
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
