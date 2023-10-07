@@ -2,6 +2,7 @@
 import { Input } from "@/components/ui/input";
 import { AxisOptions, Chart } from "react-charts";
 import { useMemo } from "react";
+import Link from "next/link";
 type DailyStars = {
   date: Date;
   stars: number;
@@ -22,19 +23,19 @@ const data: Series[] = [
       },
       {
         date: new Date(2023, 2, 13),
-        stars: 170,
+        stars: 0,
       },
       {
         date: new Date(2023, 3, 13),
-        stars: 183,
+        stars: 360,
       },
       {
         date: new Date(2023, 4, 13),
-        stars: 190,
+        stars: 250,
       },
       {
         date: new Date(2023, 5, 13),
-        stars: 180,
+        stars: 400,
       },
       {
         date: new Date(2023, 6, 13),
@@ -42,7 +43,7 @@ const data: Series[] = [
       },
       {
         date: new Date(2023, 7, 13),
-        stars: 195,
+        stars: 500,
       },
       {
         date: new Date(2023, 8, 13),
@@ -84,23 +85,92 @@ export default function Dashboard() {
     []
   );
   return (
-    <div className="grid grid-cols-[200px_1fr] h-screen">
-      <header className="bg-primary text-white">
-        <h1 className="text-xl font-bold">Commercehq</h1>
-        <nav>
-          <li className="hover:bg-white rounded cursor-pointer list-none hover:text-black mx-2">
-            Dashboard
-          </li>
-          <li className="hover:bg-white rounded cursor-pointer list-none hover:text-black mx-2">
-            Users
-          </li>
-        </nav>
+    <div className="grid grid-cols-[170px_3fr_1fr] h-screen">
+      <header className="bg-primary flex flex-col justify-between text-white pt-4">
+        <div>
+          <h1 className="text-xl font-bold py-2 m-2">Commercehq</h1>
+          <nav>
+            <li className="hover:bg-white flex gap-2 py-2 px-2 my-2 rounded cursor-pointer list-none hover:text-black mx-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"
+                />
+              </svg>
+              Dashboard
+            </li>
+            <li className="hover:bg-white  rounded cursor-pointer list-none hover:text-black mx-2">
+              <Link href={"/users"} className="flex gap-2  py-2 px-2 my-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                  />
+                </svg>
+                Users
+              </Link>
+            </li>
+          </nav>
+        </div>
+
+        <div className="mb-8">
+          <div className="bg-hero-pattern bg-no-repeat w-full h-32 py-2 pt-2 "></div>
+          <button className="rounded bg-blue-400 font-bold py-1 px-1 mx-2">
+            Upgrade the Plan
+          </button>
+        </div>
       </header>
-      <main className="px-4">
-        <Input className="w-1/2" placeholder="Search..." />
-        <h2>Growing Superhuman rate</h2>
-        <div className="flex justify-evenly gap-2 flex-wrap">
-          <div className="grid rounded-xl bg-card-background w-32 h-40 px-4">
+      <main className="px-4 mt-4">
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg
+              className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <Input
+            type="search"
+            id="default-search"
+            className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search..."
+            required
+          />
+        </div>
+        <h2 className="my-4 font-bold">Growing At Superhuman rate</h2>
+        <div className="flex justify-start gap-8 flex-wrap ">
+          <div className="grid rounded-xl flex-grow-[2] bg-card-background w-32 h-40 px-4">
             <div className="flex justify-center items-center mt-2 rounded-xl w-12 h-12 bg-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +192,7 @@ export default function Dashboard() {
               <sup className="text-green-500 font-bold pl-1">57%</sup>
             </div>
           </div>
-          <div className="grid rounded-xl bg-card-background w-32 h-40 px-4">
+          <div className="grid rounded-xl flex-grow-[2] bg-card-background min-w-32 h-40 px-4">
             <div className="flex justify-center items-center mt-2 rounded-xl w-12 h-12 bg-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +214,7 @@ export default function Dashboard() {
               <sup className="text-green-500 font-bold pl-1">57%</sup>
             </div>
           </div>
-          <div className="grid rounded-xl bg-card-background w-32 h-40 px-4">
+          <div className="grid rounded-xl flex-grow-[2] bg-card-background min-w-32 h-40 px-4">
             <div className="flex justify-center items-center mt-2 rounded-xl w-12 h-12 bg-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +236,7 @@ export default function Dashboard() {
               <sup className="text-green-500 font-bold pl-1">57%</sup>
             </div>
           </div>
-          <div className="grid rounded-xl bg-card-background w-32 h-40 px-4">
+          <div className="grid rounded-xl flex-grow-[2] bg-card-background min-w-32 h-40 px-4">
             <div className="flex justify-center items-center mt-2 rounded-xl w-12 h-12 bg-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -188,21 +258,11 @@ export default function Dashboard() {
               <sup className="text-green-500 font-bold pl-1">57%</sup>
             </div>
           </div>
-          <div className=" grid grid-cols-[1fr_2fr] w-72 rounded bg-primary h-40  bg-no-repeat">
-            <div>
-              <p className="text-white">
-                Get more out of
-                <br /> Commercehq
-              </p>
-              <button className="rounded text-white">Upgrade</button>
-            </div>
-            <div className="bg-hero-pattern bg-no-repeat py-2 pt-2 "></div>
-          </div>
         </div>
 
-        <div>
+        <div className="h-48 mb-8 mt-4">
           <p>Total Sales</p>
-          <p>$549,735.00</p>
+          <p className="font-bold text-xl">$549,735.00</p>
           <p className="text-green-500">$15,686.65</p>
           <Chart
             options={{
@@ -212,7 +272,109 @@ export default function Dashboard() {
             }}
           />
         </div>
+
+        <h2 className="mt-32 font-bold mb-2">Top Funnels</h2>
+
+        <div className=" bg-card-background rounded-md py-2 px-2">
+          <div className="flex justify-between flex-wrap">
+            <div>
+              <p className="text-primary">iPhone XR 256 GB</p>
+              <p>iPhone XR Black 10 orders</p>
+            </div>
+            <div>
+              <p>Inventory</p>
+              <p className="font-bold">573</p>
+            </div>
+            <div>
+              <p>Sale</p>
+              <p className="font-bold">$ 3,318.90</p>
+            </div>
+            <div>
+              <p>Today</p>
+              <p className="font-bold">$ 7,318.90</p>
+            </div>
+          </div>
+        </div>
       </main>
+      <aside>
+        <div className=" grid grid-cols-[1fr_2fr] w-100 p-4 mt-28 mb-4 mr-4 rounded-2xl bg-primary h-40  bg-no-repeat">
+          <div className="flex flex-col justify-between pl-4">
+            <p className="text-white">
+              Get more out of
+              <br /> Commercehq
+            </p>
+            <button className="rounded text-white border py-1 px-2 border-white">
+              Upgrade
+            </button>
+          </div>
+          <div className="bg-hero-pattern bg-no-repeat py-2 pt-2 "></div>
+        </div>
+        <div className="bg-card-background rounded-lg p-4 my-4 mr-4">
+          <div className="w-6 h-6 rounded-full bg-primary text-white">SK</div>
+          <p>In the Last 30 days</p>
+          <p>45.1% of your abandoned checkout recovery email were successful</p>
+          <div className="flex justify-around">
+            <select>
+              <option value={"Last 30 days"}>Last 30 days</option>
+              <option value={"Last 15 days"}>Last 15 days</option>
+            </select>
+            <button className="rounded text-primary bg-primary-background shadow-md py-2 px-4">
+              CHECK DATA
+            </button>
+          </div>
+        </div>
+        <div className="mr-4">
+          <p>Revenue by channel</p>
+          <div className="flex justify-between py-2">
+            <p>Direct</p>
+            <p>$5,24,685</p>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+            <div
+              className="bg-primary h-1.5 rounded-full"
+              style={{
+                width: "65.6%",
+              }}
+            ></div>
+          </div>
+          <div className="flex justify-between py-2">
+            <p>Organic Search</p>
+            <p>$5,24,685</p>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+            <div
+              className="bg-primary h-1.5 rounded-full"
+              style={{
+                width: "45.2%",
+              }}
+            ></div>
+          </div>
+          <div className="flex justify-between py-2">
+            <p>Referral</p>
+            <p>$5,24,685</p>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+            <div
+              className="bg-primary h-1.5 rounded-full"
+              style={{
+                width: "15.6%",
+              }}
+            ></div>
+          </div>
+          <div className="flex justify-between py-2">
+            <p>Social</p>
+            <p>$5,24,685</p>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+            <div
+              className="bg-primary h-1.5 rounded-full"
+              style={{
+                width: "25.2%",
+              }}
+            ></div>
+          </div>
+        </div>
+      </aside>
     </div>
   );
 }
