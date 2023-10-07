@@ -1,8 +1,90 @@
+"use client";
 import { Input } from "@/components/ui/input";
+import { AxisOptions, Chart } from "react-charts";
+import { useMemo } from "react";
+type DailyStars = {
+  date: Date;
+  stars: number;
+};
 
+type Series = {
+  label: string;
+  data: DailyStars[];
+};
+
+const data: Series[] = [
+  {
+    label: "Total Sales",
+    data: [
+      {
+        date: new Date(2023, 1, 9),
+        stars: 180,
+      },
+      {
+        date: new Date(2023, 2, 13),
+        stars: 170,
+      },
+      {
+        date: new Date(2023, 3, 13),
+        stars: 183,
+      },
+      {
+        date: new Date(2023, 4, 13),
+        stars: 190,
+      },
+      {
+        date: new Date(2023, 5, 13),
+        stars: 180,
+      },
+      {
+        date: new Date(2023, 6, 13),
+        stars: 187,
+      },
+      {
+        date: new Date(2023, 7, 13),
+        stars: 195,
+      },
+      {
+        date: new Date(2023, 8, 13),
+        stars: 190,
+      },
+      {
+        date: new Date(2023, 9, 13),
+        stars: 210,
+      },
+      {
+        date: new Date(2023, 10, 13),
+        stars: 199,
+      },
+      {
+        date: new Date(2023, 11, 13),
+        stars: 225,
+      },
+      {
+        date: new Date(2023, 12, 13),
+        stars: 220,
+      },
+    ],
+  },
+];
 export default function Dashboard() {
+  const primaryAxis = useMemo(
+    (): AxisOptions<DailyStars> => ({
+      getValue: (datum) => datum.date,
+    }),
+    []
+  );
+
+  const secondaryAxes = useMemo(
+    (): AxisOptions<DailyStars>[] => [
+      {
+        getValue: (datum) => datum.stars,
+      },
+    ],
+    []
+  );
   return (
-    <body className="grid grid-cols-[200px_1fr] h-screen">
+    <div className="grid grid-cols-[200px_1fr] h-screen">
       <header className="bg-primary text-white">
         <h1 className="text-xl font-bold">Commercehq</h1>
         <nav>
@@ -15,9 +97,8 @@ export default function Dashboard() {
         </nav>
       </header>
       <main className="px-4">
-        <Input className="w-1/2" />
+        <Input className="w-1/2" placeholder="Search..." />
         <h2>Growing Superhuman rate</h2>
-        {/* <Card /> */}
         <div className="flex justify-evenly gap-2 flex-wrap">
           <div className="grid rounded-xl bg-card-background w-32 h-40 px-4">
             <div className="flex justify-center items-center mt-2 rounded-xl w-12 h-12 bg-white">
@@ -69,7 +150,7 @@ export default function Dashboard() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                className="w-6 h-6 stroke-primary fill-primary"
+                className="w-6 h-6 stroke-primary fill-white"
               >
                 <path
                   strokeLinecap="round"
@@ -90,8 +171,8 @@ export default function Dashboard() {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
-                className="w-6 h-6 stroke-primary fill-primary"
+                strokeWidth="1.5"
+                className="w-6 h-6 stroke-primary fill-white "
               >
                 <path
                   strokeLinecap="round"
@@ -107,15 +188,31 @@ export default function Dashboard() {
               <sup className="text-green-500 font-bold pl-1">57%</sup>
             </div>
           </div>
-          <div className="bg-primary">
-            <p>
-              Get more out of
-              <br /> Commercehq
-            </p>
-            <button className="rounded text-white">Upgrade</button>
+          <div className=" grid grid-cols-[1fr_2fr] w-72 rounded bg-primary h-40  bg-no-repeat">
+            <div>
+              <p className="text-white">
+                Get more out of
+                <br /> Commercehq
+              </p>
+              <button className="rounded text-white">Upgrade</button>
+            </div>
+            <div className="bg-hero-pattern bg-no-repeat py-2 pt-2 "></div>
           </div>
         </div>
+
+        <div>
+          <p>Total Sales</p>
+          <p>$549,735.00</p>
+          <p className="text-green-500">$15,686.65</p>
+          <Chart
+            options={{
+              data,
+              primaryAxis,
+              secondaryAxes,
+            }}
+          />
+        </div>
       </main>
-    </body>
+    </div>
   );
 }
